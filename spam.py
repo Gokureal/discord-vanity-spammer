@@ -23,7 +23,7 @@ async def fetch(session, url):
 async def main():
     os.system("cls" if os.name == "nt" else "clear")
     async with aiohttp.ClientSession(headers={"Authorization": token, "X-Audit-Log-Reason": "olmaz"}, connector=None) as session:
-        async with session.get("https://canary.discord.com/api/v9/users/@me") as response:
+        async with session.get("https://discord.com/api/v9/users/@me") as response:
           if response.status in (200, 201, 204):
             user = await response.json()
             id = user["id"]
@@ -38,9 +38,9 @@ async def main():
             sys.exit()
         for x in range(100000):
             for vanity in list:
-                idk, text, jsonxd = await fetch(session, 'https://canary.discord.com/api/v9/invites/%s' % vanity)
+                idk, text, jsonxd = await fetch(session, 'https://discord.com/api/v9/invites/%s' % vanity)
                 if idk == 404:
-                    idk2 = await claim(session, 'https://canary.discord.com/api/v9/guilds/%s/vanity-url' % (guild), {"code": vanity})
+                    idk2 = await claim(session, 'https://discord.com/api/v9/guilds/%s/vanity-url' % (guild), {"code": vanity})
                     if idk2 in (200, 201, 204):
                         await notify(session, hook, {"content": "@everyone baba koydu %s" % vanity})
                         sys.exit()
